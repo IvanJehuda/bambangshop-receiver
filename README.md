@@ -74,7 +74,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [X] Commit: `Implement unsubscribe function in Notification service.`
     -   [X] Commit: `Implement unsubscribe function in Notification controller.`
     -   [X] Commit: `Implement receive_notification function in Notification service.`
-    -   [ ] Commit: `Implement receive function in Notification controller.`
+    -   [X] Commit: `Implement receive function in Notification controller.`
     -   [ ] Commit: `Implement list_messages function in Notification service.`
     -   [ ] Commit: `Implement list function in Notification controller.`
     -   [ ] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
