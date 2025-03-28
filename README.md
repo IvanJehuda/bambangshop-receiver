@@ -66,7 +66,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [X] Commit: `Create Notification database and Notification repository struct skeleton.`
     -   [X] Commit: `Implement add function in Notification repository.`
     -   [X] Commit: `Implement list_all_as_string function in Notification repository.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
+    -   [X] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
 -   **STAGE 3: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
@@ -85,5 +85,19 @@ This is the place for you to write reflections:
 ### Mandatory (Subscriber) Reflections
 
 #### Reflection Subscriber-1
+
+
+### **1. Why do we use `RwLock<>` instead of `Mutex<>` for synchronizing `Vec` of Notifications?**
+We use `RwLock<>` because it allows **multiple threads to read** the `Vec` **simultaneously**, only blocking when a write operation occurs. Since our notification system mostly **reads notifications** (e.g., listing them) and only **occasionally writes** (e.g., adding new notifications), `RwLock<>` improves performance by avoiding unnecessary blocking.
+
+If we had used `Mutex<>`, **both reads and writes would require exclusive access**, meaning even simple read operations would have to wait if another thread is holding the lock. This would create **performance bottlenecks**, especially as the number of users increases. Since our use case involves many reads and few writes, `RwLock<>` is the better choice.
+
+
+
+### **2. Why doesn’t Rust allow mutation of static variables like Java?**
+Rust prevents direct mutation of static variables to **avoid data races** and enforce **thread safety** at compile time. Unlike Java, which handles thread safety at runtime, Rust requires explicit synchronization (`RwLock<>` or `Mutex<>`) when modifying static data.
+
+If Rust allowed mutable static variables freely, different threads could modify them simultaneously, leading to **undefined behavior**. The `lazy_static` library helps by **delaying initialization** until first use while keeping the data **safe and synchronized**. This ensures we can **mutate shared static data safely** without violating Rust’s strict memory safety guarantees.
+
 
 #### Reflection Subscriber-2
