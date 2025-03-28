@@ -77,7 +77,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [X] Commit: `Implement receive function in Notification controller.`
     -   [X] Commit: `Implement list_messages function in Notification service.`
     -   [X] Commit: `Implement list function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
+    -   [X] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -99,5 +99,21 @@ Rust prevents direct mutation of static variables to **avoid data races** and en
 
 If Rust allowed mutable static variables freely, different threads could modify them simultaneously, leading to **undefined behavior**. The `lazy_static` library helps by **delaying initialization** until first use while keeping the data **safe and synchronized**. This ensures we can **mutate shared static data safely** without violating Rust’s strict memory safety guarantees.
 
-
+---
 #### Reflection Subscriber-2
+
+
+### **1. Did you explore parts of the code outside the tutorial (e.g., `src/lib.rs`)? If yes, what did you learn? If not, why?**
+Yes, I explored `src/lib.rs` and `main.rs`. From `lib.rs`, I learned how **configuration management** works using `lazy_static` and Rocket’s Figment system, allowing settings to be adjusted via environment variables. I also noticed how **error handling** is standardized with `ErrorResponse`, ensuring consistent API responses. In `main.rs`, I saw how Rocket initializes routes and manages application state, making it easier to scale and organize the project.
+
+
+### **2. How does the Observer pattern make it easy to add more subscribers? What happens if we add multiple instances of the Main app?**
+The Observer pattern makes it easy to add more subscribers because new instances of the Receiver can **subscribe dynamically** without modifying the Main app. Once subscribed, they automatically receive notifications, making the system flexible and loosely coupled.
+
+However, adding multiple instances of the Main app is harder because **each instance keeps its own subscriber list**. Subscribers would have to register separately with each instance, and events in one instance wouldn’t automatically notify subscribers of another instance. To solve this, we’d need **a shared message broker or database** to sync subscribers across all Main app instances.
+
+
+### **3. Have you added your own tests or improved Postman documentation? Was it useful?**
+Yes, I improved my Postman collection by adding **descriptions** for each endpoint and **test scripts** to verify responses. For example, I added tests to check if notifications are properly formatted and if subscriptions return the correct data.
+
+These improvements were very useful because they made it easier to understand how the API works and **quickly verify** if my implementation was correct. 
